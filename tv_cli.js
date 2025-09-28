@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * TV Shows CLI - Search shows and stream entire seasons in mpv
+ * TrpTv - Search shows and stream entire seasons in mpv
  * Extracts actual stream URLs from 123moviespremium.net
  */
 
@@ -91,8 +91,8 @@ async function promptShowSearch() {
   /**
    * Interactive show search with dynamic results
    */
-  console.log('\n🎬 TV Shows Streaming CLI');
-  console.log('═══════════════════════════\n');
+  console.log('\n🎬 TrpTv Streaming CLI');
+  console.log('═════════════════════\n');
 
   while (true) {
     const searchAnswer = await inquirer.prompt([

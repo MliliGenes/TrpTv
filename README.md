@@ -1,4 +1,4 @@
-# TV Shows CLI Streamer 📺
+# TrpTv 📺
 
 A command-line interface for searching and streaming TV shows and cartoons directly in mpv player. Extracts actual stream URLs from 123moviespremium.net for seamless viewing.
 
@@ -17,10 +17,7 @@ A command-line interface for searching and streaming TV shows and cartoons direc
 ### Prerequisites
 
 - **Node.js** (v14 or higher)
-- **Python** (3.7 or higher) 
-- **mpv player** - [Installation Guide](https://mpv.io/installation/)
-
-### Setup
+- **mpv player** - [Installation Guide](https://mpv.io/installation/)### Setup
 
 1. **Clone the repository**:
    ```bash
@@ -33,12 +30,7 @@ A command-line interface for searching and streaming TV shows and cartoons direc
    npm install
    ```
 
-3. **Install Python dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Make the CLI executable**:
+3. **Make the CLI executable**:
    ```bash
    chmod +x tv_cli.js
    ```
@@ -75,41 +67,19 @@ node tv_cli.js
 ## 📁 Project Structure
 
 ```
-tv/
+trptv/
 ├── tv_cli.js              # Main CLI application
-├── watch.js               # Watch functionality module
-├── scrape_episodes.py     # Episode data scraper
-├── add_watch_urls.py      # URL extraction utility
+├── watch.js               # Watch functionality module  
 ├── cartoons_data.json     # Show database
 ├── package.json           # Node.js dependencies
-├── requirements.txt       # Python dependencies
-├── scraper.log           # Scraping logs
-├── watch_urls.log        # URL extraction logs
-└── __pycache__/          # Python cache files
+└── README.md             # Documentation
 ```
 
 ## 🔧 Development
 
 ### Data Management
 
-The project includes Python scripts for data management:
-
-- **scrape_episodes.py**: Scrapes episode data from source websites
-- **add_watch_urls.py**: Adds streaming URLs to the database
-
-### Updating Show Database
-
-To refresh the show database:
-```bash
-python scrape_episodes.py
-python add_watch_urls.py
-```
-
-### Adding New Shows
-
-1. Update the scraping logic in `scrape_episodes.py`
-2. Run the scraper to update `cartoons_data.json`
-3. Extract stream URLs using `add_watch_urls.py`
+The show database (`cartoons_data.json`) contains curated TV show and episode information. For development tools and database updates, see the `scraping-tools` branch.
 
 ## 🎯 Features Breakdown
 
@@ -135,11 +105,6 @@ python add_watch_urls.py
 - `axios` - HTTP requests
 - `cheerio` - HTML parsing
 - `inquirer` - Interactive CLI prompts
-
-### Python Packages
-- `requests` - HTTP requests
-- `beautifulsoup4` - HTML parsing
-- `concurrent.futures` - Parallel processing
 
 ## ⚠️ Notes
 
