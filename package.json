@@ -8,7 +8,11 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node tv_cli.js"
+    "start": "node tv_cli.js",
+    "generate-metadata": "node generate_metadata.js",
+    "metadata": "node generate_metadata.js",
+    "validate-metadata": "node generate_metadata.js --validate",
+    "metadata-stats": "node generate_metadata.js --stats"
   },
   "keywords": ["tv", "streaming", "cli", "mpv", "entertainment", "npx"],
   "preferGlobal": false,
