@@ -1,0 +1,19 @@
+{
+  "name": "seteven",
+  "version": "1.0.0",
+  "description": "",
+  "main": "watch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "cheerio": "^1.1.2",
+    "inquirer": "^12.9.6",
+    "open": "^10.2.0"
+  }
+}
