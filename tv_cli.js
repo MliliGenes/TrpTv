@@ -117,108 +117,20 @@ async function getActualStreamUrl(idd, season, episode) {
       });
     }
 
-    // Step 4: If we found a gomovies-sx embed URL, try to extract the actual video URL from it
-    if (watchUrl && watchUrl.includes('gomovies-sx.net/embed/')) {
-      try {
-        console.log(`🔄 Processing embed page: ${watchUrl.substring(0, 50)}...`);
-        
-        const embedResponse = await axios.get(watchUrl, {
-          headers: {
-            ...HEADERS,
-            'Referer': 'https://gomovies-sx.net/'
-          },
-          timeout: 15000
-        });
-        
-        const embed$ = cheerio.load(embedResponse.data);
-        let actualVideoUrl = null;
-        
-        // Check for nested iframe sources (base64 encoded URLs)
-        const iframeSrc = embed$('iframe').first().attr('src');
-        if (iframeSrc) {
-          try {
-            // Handle protocol-relative URLs
-            let fullIframeUrl = iframeSrc;
-            if (iframeSrc.startsWith('//')) {
-              fullIframeUrl = 'https:' + iframeSrc;
-            }
-            
-            console.log(`🔄 Following iframe: ${fullIframeUrl.substring(0, 50)}...`);
-            
-            const iframeResponse = await axios.get(fullIframeUrl, {
-              headers: {
-                ...HEADERS,
-                'Referer': watchUrl
-              },
-              timeout: 15000
-            });
-            
-            const iframe$ = cheerio.load(iframeResponse.data);
-            
-            // Look for video URLs in the iframe content
-            const videoSelectors = [
-              'video[src]',
-              'video source[src]', 
-              '[data-src*=".mp4"]',
-              '[data-src*=".m3u8"]'
-            ];
-            
-            for (const selector of videoSelectors) {
-              const element = iframe$(selector).first();
-              if (element.length) {
-                const src = element.attr('src') || element.attr('data-src');
-                if (src && (src.includes('.mp4') || src.includes('.m3u8')) && src.startsWith('http')) {
-                  actualVideoUrl = src;
-                  break;
-                }
-              }
-            }
-            
-            // Also search in script content of the iframe
-            if (!actualVideoUrl) {
-              iframe$('script').each((_, script) => {
-                const scriptContent = iframe$(script).html();
-                if (!scriptContent) return;
-                
-                // Enhanced patterns for video URLs
-                const videoPatterns = [
-                  /"(https?:\/\/[^"]*\.mp4[^"]*)"/gi,
-                  /"(https?:\/\/[^"]*\.m3u8[^"]*)"/gi,
-                  /file\s*:\s*["']([^"']+\.(?:mp4|m3u8))[^"']*/gi,
-                  /src\s*:\s*["']([^"']+\.(?:mp4|m3u8))[^"']*/gi,
-                  /source\s*:\s*["']([^"']+\.(?:mp4|m3u8))[^"']*/gi,
-                  /url\s*:\s*["']([^"']+\.(?:mp4|m3u8))[^"']*/gi
-                ];
-                
-                for (const pattern of videoPatterns) {
-                  const matches = [...scriptContent.matchAll(pattern)];
-                  if (matches.length > 0) {
-                    const url = matches[0][1];
-                    if (url && url.startsWith('http')) {
-                      actualVideoUrl = url;
-                      return false; // Break out of each loop
-                    }
-                  }
-                }
-              });
-            }
-            
-          } catch (iframeError) {
-            console.log(`⚠️  Could not process nested iframe: ${iframeError.message}`);
-          }
-        }
-        
-        if (actualVideoUrl) {
-          console.log(`✅ Extracted actual video URL: ${actualVideoUrl.substring(0, 50)}...`);
-          return actualVideoUrl;
-        } else {
-          console.log(`⚠️  Could not extract video URL from embed page - may require browser execution`);
-          console.log(`💡 Falling back to original embed URL for mpv to handle`);
-        }
-        
-      } catch (embedError) {
-        console.log(`⚠️  Failed to process embed page: ${embedError.message}`);
-      }
+    // Step 4: Handle embed URLs that require browser execution
+    const browserRequiredPatterns = [
+      /gomovies-sx\.net\/embed/,
+      /embed\..*\/tv\//,
+      /player\..*\/embed/,
+      /cloudnestra\.com/
+    ];
+    
+    const requiresBrowser = watchUrl && browserRequiredPatterns.some(pattern => pattern.test(watchUrl));
+    
+    if (requiresBrowser) {
+      console.log(`🌐 This embed URL requires browser execution: ${watchUrl.substring(0, 60)}...`);
+      console.log(`🚀 Opening in browser instead of mpv...`);
+      return { url: watchUrl, requiresBrowser: true };
     }
 
     if (!watchUrl) {
@@ -528,126 +440,145 @@ async function createMpvPlaylist(streamUrls, showTitle, seasonNumber) {
   return playlistPath;
 }
 
-async function streamSeasonInMpv(season, showTitle) {
+async function streamSeasonInMpv(idd, seasonData, seasonNumber) {
   /**
-   * Stream entire season in mpv with actual stream URLs
+   * Stream all episodes of a season in sequence
    */
-  try {
-    // Get all stream URLs for the season
-    const streamUrls = await getAllSeasonStreamUrls(season, showTitle);
-    
-    // Create mpv playlist
-    const playlistPath = await createMpvPlaylist(streamUrls, showTitle, season.season_number);
-    
-    console.log(`\n🎬 Starting mpv with ${streamUrls.length} episodes...`);
-    console.log('💡 mpv Controls:');
-    console.log('   > or ENTER = Next episode');
-    console.log('   < = Previous episode');
-    console.log('   SPACE = Pause/Play');
-    console.log('   Q = Quit');
-    console.log('   F = Fullscreen\n');
-    
-    // Launch mpv with the playlist
-    const mpv = spawn("mpv", [
-      playlistPath,
-      "--playlist-start=0",
-      "--keep-open=yes",
-      "--force-window=immediate",
-      "--title=" + `${showTitle} - Season ${season.season_number}`
-    ], { 
-      stdio: "inherit" 
-    });
-    
-    mpv.on("exit", (code) => {
-      console.log(`\n🎬 mpv exited with code ${code}`);
-      
-      // Clean up playlist file
-      try {
-        fs.unlinkSync(playlistPath);
-        console.log('🗑️  Playlist file cleaned up');
-      } catch (err) {
-        console.warn('⚠️  Could not clean up playlist file:', err.message);
-      }
-      
-      process.exit(code);
-    });
-    
-    mpv.on("error", (error) => {
-      console.error('❌ Error starting mpv:', error.message);
-      console.log('💡 Make sure mpv is installed: https://mpv.io/installation/');
-    });
-    
-  } catch (error) {
-    console.error('❌ Error streaming season:', error.message);
-  }
-}
+  const episodes = seasonData.episodes;
+  console.log(`🔄 Preparing ${episodes.length} episodes from Season ${seasonNumber}...`);
+  console.log("This may take a moment as we extract the real stream URLs...\n");
 
-async function streamEpisodeInMpv(episode, showTitle) {
-  /**
-   * Stream a single episode in mpv with enhanced URL extraction
-   */
-  try {
-    console.log(`\n🔄 Preparing S${episode.season_id}E${episode.episode_id} - ${episode.title}...`);
-    console.log('Extracting stream URL from available sources...\n');
+  let browserEpisodes = [];
+  let mpvEpisodes = [];
+
+  // First, categorize episodes by streaming method
+  for (let i = 0; i < episodes.length; i++) {
+    const episode = episodes[i];
+    console.log(`[${i + 1}/${episodes.length}] Processing "${episode.title}"...`);
     
-    // Get the actual stream URL for the episode
-    const streamUrl = await getActualStreamUrl(
-      episode.show_id, 
-      episode.season_id, 
-      episode.episode_id
-    );
+    const streamResult = await getActualStreamUrl(idd, seasonNumber, episode.episode);
     
-    if (!streamUrl) {
-      console.error(`❌ Could not find a working stream URL for this episode.`);
-      console.log(`💡 This could be because:`);
-      console.log(`   • The episode is not available on the streaming source`);
-      console.log(`   • The source website has changed its structure`);
-      console.log(`   • Temporary network issues\n`);
-      
-      const retryAnswer = await inquirer.prompt([
-        {
-          type: "confirm",
-          name: "retry",
-          message: "Would you like to try a different episode?",
-          default: true
-        }
-      ]);
-      
-      if (!retryAnswer.retry) {
-        return;
-      } else {
-        throw new Error("RETRY_EPISODE_SELECTION");
-      }
+    if (!streamResult) {
+      console.log(`⚠️  Failed to get stream URL for episode ${episode.episode}`);
+      continue;
     }
     
-    console.log(`\n🎬 Starting mpv for S${episode.season_id}E${episode.episode_id}...`);
-    console.log('💡 mpv Controls:');
-    console.log('   SPACE = Pause/Play');
-    console.log('   Q = Quit');
-    console.log('   F = Fullscreen\n');
+    if (typeof streamResult === 'object' && streamResult.requiresBrowser) {
+      browserEpisodes.push({
+        episode: episode,
+        url: streamResult.url
+      });
+    } else {
+      mpvEpisodes.push({
+        episode: episode,
+        url: typeof streamResult === 'string' ? streamResult : streamResult.url
+      });
+    }
+  }
+
+  // Handle browser episodes first (if any)
+  if (browserEpisodes.length > 0) {
+    console.log(`\n🌐 Found ${browserEpisodes.length} episodes that require browser playback:`);
+    for (const item of browserEpisodes) {
+      console.log(`   Episode ${item.episode.episode}: ${item.episode.title}`);
+      console.log(`   URL: ${item.url}`);
+    }
+    console.log(`\n💡 Please open these URLs manually in your browser.`);
     
-    // Launch mpv with the single episode URL
-    const mpv = spawn("mpv", [
-      streamUrl,
-      "--keep-open=yes",
-      "--force-window=immediate",
-      "--title=" + `${showTitle} - S${episode.season_id}E${episode.episode_id} - ${episode.title}`
-    ], { 
-      stdio: "inherit" 
+    if (mpvEpisodes.length > 0) {
+      console.log(`\n🎬 Continuing with ${mpvEpisodes.length} episodes that can be played in mpv...\n`);
+    }
+  }
+
+  // Play mpv episodes in sequence
+  for (let i = 0; i < mpvEpisodes.length; i++) {
+    const item = mpvEpisodes[i];
+    console.log(`🎬 Playing Episode ${item.episode.episode}: ${item.episode.title}...`);
+    console.log(`� mpv Controls: SPACE = Pause/Play | Q = Quit | F = Fullscreen\n`);
+    
+    const mpvProcess = spawn("mpv", [item.url], { stdio: "inherit" });
+    
+    const playResult = await new Promise((resolve) => {
+      mpvProcess.on("close", (code) => {
+        resolve(code);
+      });
     });
     
-    mpv.on("exit", (code) => {
-      console.log(`\n🎬 mpv exited with code ${code}`);
-      process.exit(code);
-    });
+    if (playResult !== 0) {
+      console.log(`\n⚠️  Episode ended unexpectedly (code ${playResult}). Continuing to next episode...\n`);
+    } else {
+      console.log(`\n✅ Episode ${item.episode.episode} completed successfully!\n`);
+    }
+  }
+  
+  console.log(`🎉 Season ${seasonNumber} processing complete!`);
+  if (browserEpisodes.length > 0) {
+    console.log(`📝 Remember to watch the ${browserEpisodes.length} browser episodes listed above.`);
+  }
+  console.log("👋 Thanks for watching!");
+}
+
+async function streamEpisodeInMpv(idd, season, episode, episodeName) {
+  /**
+   * Stream a single episode using mpv player or browser
+   */
+  try {
+    console.log(`🔄 Preparing S${season}E${episode} - ${episodeName}...`);
+    console.log("Extracting stream URL from available sources...");
     
-    mpv.on("error", (error) => {
-      console.error('❌ Error starting mpv:', error.message);
-      console.log('💡 Make sure mpv is installed: https://mpv.io/installation/');
-    });
+    const streamResult = await getActualStreamUrl(idd, season, episode);
+    if (!streamResult) {
+      console.error("❌ Error streaming episode: Failed to get stream URL for this episode");
+      return false;
+    }
+
+    // Handle browser-required URLs
+    if (typeof streamResult === 'object' && streamResult.requiresBrowser) {
+      console.log(`🌐 Opening S${season}E${episode} in your default browser...`);
+      console.log(`💡 Browser Controls:\n   Click play button on the page\n   Use browser's fullscreen controls\n   Close tab when done\n`);
+      
+      const { spawn } = await import('child_process');
+      
+      // Try different browser commands based on system
+      const browserCommands = ['xdg-open', 'open', 'start'];
+      
+      for (const cmd of browserCommands) {
+        try {
+          spawn(cmd, [streamResult.url], { detached: true, stdio: 'ignore' });
+          console.log(`✅ Opened in browser successfully!`);
+          return true;
+        } catch (error) {
+          continue; // Try next command
+        }
+      }
+      
+      console.log(`❌ Could not open browser automatically. Please open this URL manually:`);
+      console.log(`🔗 ${streamResult.url}`);
+      return false;
+    }
+
+    // Handle regular streaming URLs with mpv
+    const streamUrl = typeof streamResult === 'string' ? streamResult : streamResult.url;
     
+    console.log(`🎬 Starting mpv for S${season}E${episode}...`);
+    console.log(`💡 mpv Controls:\n   SPACE = Pause/Play\n   Q = Quit\n   F = Fullscreen\n`);
+    
+    const mpvProcess = spawn("mpv", [streamUrl], { stdio: "inherit" });
+
+    return new Promise((resolve) => {
+      mpvProcess.on("close", (code) => {
+        if (code === 0) {
+          console.log("👋 Goodbye!");
+        } else {
+          console.log(`🎬 mpv exited with code ${code}`);
+        }
+        resolve(code === 0);
+      });
+    });
+
   } catch (error) {
-    console.error('❌ Error streaming episode:', error.message);
+    console.error("❌ Error streaming episode:", error.message);
+    return false;
   }
 }
 
@@ -692,7 +623,9 @@ async function main() {
             ]);
             
             if (confirmAnswer.stream) {
-              await streamSeasonInMpv(selectedSeason, selectedShow.title);
+              // Get show_id from any episode in the season
+              const showId = selectedSeason.episodes[0]?.show_id;
+              await streamSeasonInMpv(showId, selectedSeason, selectedSeason.season_number);
               return; // Exit after streaming
             }
           } else if (watchType === "episode") {
@@ -715,7 +648,12 @@ async function main() {
               
               if (confirmAnswer.stream) {
                 try {
-                  await streamEpisodeInMpv(selectedEpisode, selectedShow.title);
+                  await streamEpisodeInMpv(
+                    selectedEpisode.show_id, 
+                    selectedEpisode.season_id, 
+                    selectedEpisode.episode_id, 
+                    selectedEpisode.title
+                  );
                   return; // Exit after streaming
                 } catch (episodeError) {
                   if (episodeError.message === "RETRY_EPISODE_SELECTION") {
