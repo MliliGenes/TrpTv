@@ -456,10 +456,10 @@ async function streamSeasonInMpv(idd, seasonData, seasonNumber) {
     const episode = episodes[i];
     console.log(`[${i + 1}/${episodes.length}] Processing "${episode.title}"...`);
     
-    const streamResult = await getActualStreamUrl(idd, seasonNumber, episode.episode);
+    const streamResult = await getActualStreamUrl(idd, seasonNumber, episode.episode_id);
     
     if (!streamResult) {
-      console.log(`⚠️  Failed to get stream URL for episode ${episode.episode}`);
+      console.log(`⚠️  Failed to get stream URL for episode ${episode.episode_id}`);
       continue;
     }
     
@@ -480,7 +480,7 @@ async function streamSeasonInMpv(idd, seasonData, seasonNumber) {
   if (browserEpisodes.length > 0) {
     console.log(`\n🌐 Found ${browserEpisodes.length} episodes that require browser playback:`);
     for (const item of browserEpisodes) {
-      console.log(`   Episode ${item.episode.episode}: ${item.episode.title}`);
+      console.log(`   Episode ${item.episode.episode_id}: ${item.episode.title}`);
       console.log(`   URL: ${item.url}`);
     }
     console.log(`\n💡 Please open these URLs manually in your browser.`);
@@ -493,7 +493,7 @@ async function streamSeasonInMpv(idd, seasonData, seasonNumber) {
   // Play mpv episodes in sequence
   for (let i = 0; i < mpvEpisodes.length; i++) {
     const item = mpvEpisodes[i];
-    console.log(`🎬 Playing Episode ${item.episode.episode}: ${item.episode.title}...`);
+    console.log(`🎬 Playing Episode ${item.episode.episode_id}: ${item.episode.title}...`);
     console.log(`� mpv Controls: SPACE = Pause/Play | Q = Quit | F = Fullscreen\n`);
     
     const mpvProcess = spawn("mpv", [item.url], { stdio: "inherit" });
@@ -507,7 +507,7 @@ async function streamSeasonInMpv(idd, seasonData, seasonNumber) {
     if (playResult !== 0) {
       console.log(`\n⚠️  Episode ended unexpectedly (code ${playResult}). Continuing to next episode...\n`);
     } else {
-      console.log(`\n✅ Episode ${item.episode.episode} completed successfully!\n`);
+      console.log(`\n✅ Episode ${item.episode.episode_id} completed successfully!\n`);
     }
   }
   
