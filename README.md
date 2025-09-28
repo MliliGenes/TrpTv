@@ -25,25 +25,70 @@ A command-line interface for searching and streaming TV shows and cartoons direc
    cd tv
    ```
 
-2. **Install Node.js dependencies**:
+2. **Install dependencies**:
    ```bash
    npm install
    ```
 
-3. **Make the CLI executable**:
+3. **Install globally (recommended)**:
+
+   **Option A: Using sudo (Linux/Mac)**
+   ```bash
+   sudo npm run install-global
+   # or: sudo npm install -g .
+   ```
+
+   **Option B: Using npx (No installation needed)**
+   ```bash
+   # No installation required, run directly:
+   npx trptv@file:.
+   ```
+
+   **Option C: Make executable locally**
    ```bash
    chmod +x tv_cli.js
+   # Then create an alias in your shell profile (~/.bashrc, ~/.zshrc):
+   echo 'alias trptv="'$(pwd)'/tv_cli.js"' >> ~/.zshrc
+   source ~/.zshrc
    ```
 
 ## 🚀 Usage
 
-### Basic Usage
+### Global Installation (with sudo)
 
-Run the TV CLI:
+After global installation with sudo, run TrpTv from anywhere:
+```bash
+trptv
+```
+
+### Using npx (Recommended - No installation needed)
+
+Run TrpTv directly without installation:
+```bash
+npx trptv@file:.
+```
+
+### Local Usage with Alias
+
+If you set up the local alias:
+```bash
+trptv  # Works from anywhere
+```
+
+### Local Usage (Basic)
+
+Run locally without installation:
 ```bash
 node tv_cli.js
-# or if made executable:
-./tv_cli.js
+# or if made executable: ./tv_cli.js
+```
+
+### Uninstalling Global Installation
+
+To remove TrpTv from global commands:
+```bash
+sudo npm run uninstall-global
+# or: sudo npm uninstall -g trptv
 ```
 
 ### Navigation Flow

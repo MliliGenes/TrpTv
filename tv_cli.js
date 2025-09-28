@@ -25,14 +25,33 @@ try {
   process.exit(1);
 }
 
+// Load cached working shows if available
+const cacheFile = path.join(__dirname, '.working_shows_cache.json');
+let workingShowsCache = {};
+try {
+  if (fs.existsSync(cacheFile)) {
+    workingShowsCache = JSON.parse(fs.readFileSync(cacheFile, 'utf8'));
+  }
+} catch (error) {
+  console.warn('⚠️  Could not load working shows cache, will rebuild as needed');
+}
+
+// Save working shows cache
+function saveWorkingShowsCache() {
+  try {
+    fs.writeFileSync(cacheFile, JSON.stringify(workingShowsCache, null, 2));
+  } catch (error) {
+    console.warn('⚠️  Could not save working shows cache');
+  }
+}
+
 const HEADERS = {
   "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
 };
 
 async function getActualStreamUrl(idd, season, episode) {
   /**
-   * Extract the actual 123moviespremium.net stream URL
-   * This is the URL that the browser makes GET requests to
+   * Extract streaming URLs from multiple sources with fallback mechanisms
    */
   const baseUrl = `https://stevenuniverse.best/video-player/?idd=${idd}&season=${season}&episode=${episode}`;
   const referer = "https://stevenuniverse.best";
@@ -43,28 +62,92 @@ async function getActualStreamUrl(idd, season, episode) {
     // Step 1: Fetch the video player page
     const { data: html } = await axios.get(baseUrl, {
       headers: { ...HEADERS, "Referer": referer },
-      timeout: 15000
+      timeout: 20000
     });
 
-    // Step 2: Extract the 123moviespremium.net watch URL
     const $ = cheerio.load(html);
     let watchUrl = null;
     
-    // Look in iframes, scripts, and links for the watch URL
-    $("iframe, script, a").each((_, el) => {
-      const attr = $(el).attr("src") || $(el).attr("href") || $(el).text();
-      if (attr && attr.includes("123moviespremium.net/watch/")) {
-        watchUrl = attr.replace(/&amp;/g, "&");
-        return false; // Break the loop
-      }
-    });
+    // Define streaming source patterns to look for
+    const streamingPatterns = [
+      /123moviespremium\.net\/watch\//,
+      /123movies\w*\.net\/watch\//,
+      /movies123\..*\/watch\//,
+      /fmovies\..*\/watch\//,
+      /gomovies\..*\/watch\//,
+      /putlocker\..*\/watch\//,
+      /solarmovie\..*\/watch\//,
+      /vidsrc\..*\/embed\//,
+      /embed\..*\/.*\?.*=/,
+      /player\..*\/.*\?.*=/
+    ];
+    
+    // Step 2: Look for streaming URLs in various elements
+    const searchElements = ["iframe", "script", "a", "source", "video"];
+    const searchAttributes = ["src", "href", "data-src", "data-url"];
+    
+    for (const element of searchElements) {
+      $(element).each((_, el) => {
+        // Check all relevant attributes
+        for (const attr of searchAttributes) {
+          const url = $(el).attr(attr);
+          if (url && streamingPatterns.some(pattern => pattern.test(url))) {
+            watchUrl = url.replace(/&amp;/g, "&");
+            return false; // Break out of loops
+          }
+        }
+        
+        // Also check text content for URLs
+        const text = $(el).text();
+        if (text && streamingPatterns.some(pattern => pattern.test(text))) {
+          // Extract URL from text using regex
+          const urlMatch = text.match(/(https?:\/\/[^\s'"<>]+)/);
+          if (urlMatch && streamingPatterns.some(pattern => pattern.test(urlMatch[1]))) {
+            watchUrl = urlMatch[1];
+            return false;
+          }
+        }
+      });
+      
+      if (watchUrl) break;
+    }
+    
+    // Step 3: If no streaming URL found, try to extract any video-like URLs
+    if (!watchUrl) {
+      console.log(`🔄 No standard streaming URL found, searching for alternative sources...`);
+      
+      // Look for any URLs that might be video sources
+      const videoPatterns = [
+        /\.mp4(\?|$)/,
+        /\.m3u8(\?|$)/,
+        /\.webm(\?|$)/,
+        /\/embed\/.*\?/,
+        /\/player\/.*\?/,
+        /\/watch\/.*\?/
+      ];
+      
+      $("iframe, script, a, source, video").each((_, el) => {
+        const url = $(el).attr("src") || $(el).attr("href") || $(el).attr("data-src");
+        if (url && videoPatterns.some(pattern => pattern.test(url))) {
+          watchUrl = url.replace(/&amp;/g, "&");
+          return false;
+        }
+      });
+    }
 
     if (!watchUrl) {
-      console.warn(`⚠️  No 123moviespremium watch URL found for S${season}E${episode}`);
+      console.warn(`⚠️  No streaming URL found for S${season}E${episode}`);
+      console.log(`🐛 Debug: Checking page content...`);
+      
+      // Debug: Show what we found in the page
+      const iframes = $("iframe").length;
+      const scripts = $("script").length;
+      console.log(`   Found ${iframes} iframes, ${scripts} scripts`);
+      
       return null;
     }
 
-    console.log(`✅ Found stream URL: ${watchUrl.substring(0, 60)}...`);
+    console.log(`✅ Found stream URL: ${watchUrl.substring(0, 80)}...`);
     return watchUrl;
 
   } catch (error) {
@@ -73,12 +156,77 @@ async function getActualStreamUrl(idd, season, episode) {
   }
 }
 
+// Cache for tested shows to avoid re-testing
+const testedShows = new Map();
+
+async function testShowAvailability(show, maxEpisodesToTest = 2) {
+  /**
+   * Test if a show has working stream URLs by checking a few episodes
+   */
+  const showKey = `${show.title}_${show.seasons?.[0]?.season_number || 'unknown'}`;
+  
+  // Return cached result if already tested (memory cache first, then persistent cache)
+  if (testedShows.has(showKey)) {
+    return testedShows.get(showKey);
+  }
+  
+  if (workingShowsCache[showKey] !== undefined) {
+    const result = workingShowsCache[showKey];
+    testedShows.set(showKey, result);
+    return result;
+  }
+  
+  try {
+    // Find first season with episodes
+    const workingSeason = show.seasons?.find(season => 
+      season.episodes && season.episodes.length > 0
+    );
+    
+    if (!workingSeason) {
+      testedShows.set(showKey, false);
+      return false;
+    }
+    
+    // Test first few episodes of the season
+    const episodesToTest = workingSeason.episodes.slice(0, maxEpisodesToTest);
+    let workingCount = 0;
+    
+    for (const episode of episodesToTest) {
+      const streamUrl = await getActualStreamUrl(
+        episode.show_id,
+        episode.season_id,
+        episode.episode_id
+      );
+      
+      if (streamUrl) {
+        workingCount++;
+      }
+      
+      // Small delay to be respectful
+      await new Promise(resolve => setTimeout(resolve, 500));
+    }
+    
+    const isWorking = workingCount > 0;
+    testedShows.set(showKey, isWorking);
+    workingShowsCache[showKey] = isWorking;
+    saveWorkingShowsCache(); // Save to persistent cache
+    return isWorking;
+    
+  } catch (error) {
+    console.error(`Error testing show ${show.title}:`, error.message);
+    testedShows.set(showKey, false);
+    workingShowsCache[showKey] = false;
+    saveWorkingShowsCache();
+    return false;
+  }
+}
+
 function searchShows(query) {
   /**
    * Search shows with dynamic filtering
    */
   if (!query || query.trim().length === 0) {
-    return showsData.cartoons.slice(0, 20); // Show first 20 if no search
+    return showsData.cartoons.slice(0, 30); // Show more since we'll filter
   }
   
   const searchTerm = query.toLowerCase().trim();
@@ -87,10 +235,63 @@ function searchShows(query) {
   );
 }
 
+async function bulkTestAllShows() {
+  /**
+   * Test all shows in the database for working streams (power user feature)
+   */
+  console.clear();
+  console.log('\n🎬 TrpTv - Bulk Show Testing');
+  console.log('═════════════════════════════\n');
+  
+  const allShows = showsData.cartoons;
+  console.log(`🔍 Testing ${allShows.length} shows for working streams...`);
+  console.log('This will take a while but will improve future searches!\n');
+  
+  const confirmAnswer = await inquirer.prompt([
+    {
+      type: "confirm",
+      name: "proceed",
+      message: "This will test all shows and may take 10-20 minutes. Continue?",
+      default: false
+    }
+  ]);
+  
+  if (!confirmAnswer.proceed) {
+    return;
+  }
+  
+  let workingCount = 0;
+  let totalTested = 0;
+  
+  for (let i = 0; i < allShows.length; i++) {
+    const show = allShows[i];
+    totalTested++;
+    
+    process.stdout.write(`\r[${i + 1}/${allShows.length}] Testing "${show.title}"...                              `);
+    
+    const isWorking = await testShowAvailability(show, 1); // Test only 1 episode for speed
+    if (isWorking) {
+      workingCount++;
+      process.stdout.write(`\r[${i + 1}/${allShows.length}] ✅ "${show.title}"                              `);
+    } else {
+      process.stdout.write(`\r[${i + 1}/${allShows.length}] ❌ "${show.title}"                              `);
+    }
+    console.log(); // New line
+  }
+  
+  console.log(`\n✅ Bulk testing complete!`);
+  console.log(`   Working shows: ${workingCount}/${totalTested}`);
+  console.log(`   Success rate: ${((workingCount/totalTested)*100).toFixed(1)}%`);
+  console.log(`   Cache saved for future searches\n`);
+  
+  await new Promise(resolve => setTimeout(resolve, 3000));
+}
+
 async function promptShowSearch() {
   /**
-   * Interactive show search with dynamic results
+   * Interactive show search with working show filtering
    */
+  console.clear();
   console.log('\n🎬 TrpTv Streaming CLI');
   console.log('═════════════════════\n');
 
@@ -100,27 +301,93 @@ async function promptShowSearch() {
         type: "input",
         name: "search",
         message: "🔍 Search TV shows (or press Enter to browse):",
+        filter: (input) => input.trim()
       }
     ]);
 
-    const results = searchShows(searchAnswer.search);
+    const allResults = searchShows(searchAnswer.search);
     
-    if (results.length === 0) {
-      console.log('❌ No shows found. Try a different search term.');
+    if (allResults.length === 0) {
+      console.log('\n❌ No shows found. Try a different search term.\n');
       continue;
     }
 
-    console.log(`\n📺 Found ${results.length} show(s):`);
+    // Ask user if they want to filter for working shows
+    const filterAnswer = await inquirer.prompt([
+      {
+        type: "list",
+        name: "filterType",
+        message: `Found ${allResults.length} show(s). How would you like to proceed?`,
+        choices: [
+          { name: "🎯 Show only verified working shows (slower but reliable)", value: "working" },
+          { name: "📺 Show all shows (faster but may include broken ones)", value: "all" },
+          new inquirer.Separator(),
+          { name: "🔍 Search again", value: "search_again" }
+        ]
+      }
+    ]);
+
+    if (filterAnswer.filterType === "search_again") {
+      continue;
+    }
+
+    let results = allResults.slice(0, 20);
+    
+    if (filterAnswer.filterType === "working") {
+      console.clear();
+      console.log('\n🎬 TrpTv Streaming CLI');
+      console.log('═════════════════════\n');
+      console.log('🔍 Testing shows for working streams...\n');
+      console.log('This may take a moment but ensures better results!\n');
+      
+      const workingShows = [];
+      
+      for (let i = 0; i < results.length; i++) {
+        const show = results[i];
+        process.stdout.write(`\r[${i + 1}/${results.length}] Testing "${show.title}"...                    `);
+        
+        const isWorking = await testShowAvailability(show);
+        if (isWorking) {
+          workingShows.push(show);
+          process.stdout.write(`\r[${i + 1}/${results.length}] ✅ "${show.title}"                    `);
+        } else {
+          process.stdout.write(`\r[${i + 1}/${results.length}] ❌ "${show.title}"                    `);
+        }
+        console.log(); // New line
+      }
+      
+      results = workingShows;
+      
+      if (results.length === 0) {
+        console.log('\n❌ No working shows found in this search. Try a different search term or browse all shows.\n');
+        continue;
+      }
+      
+      console.log(`\n✅ Found ${results.length} verified working shows!\n`);
+    }
+
+    // Clear and show final results
+    console.clear();
+    console.log('\n🎬 TrpTv Streaming CLI');
+    console.log('═════════════════════\n');
+    
+    if (filterAnswer.filterType === "working") {
+      console.log(`✅ ${results.length} Verified Working Shows:\n`);
+    } else {
+      console.log(`📺 ${results.length} Shows (unfiltered):\n`);
+    }
     
     // Prepare choices with episode counts
-    const choices = results.slice(0, 15).map(show => {
+    const choices = results.map(show => {
       const totalEpisodes = show.seasons.reduce((total, season) => 
         total + (season.episodes ? season.episodes.length : 0), 0
       );
       const availableSeasons = show.seasons.filter(s => s.episodes && s.episodes.length > 0).length;
       
+      const workingIndicator = filterAnswer.filterType === "working" ? "✅ " : "";
+      
       return {
-        name: `${show.title} (${availableSeasons} seasons, ${totalEpisodes} episodes)`,
+        name: `${workingIndicator}${show.title} (${availableSeasons} seasons, ${totalEpisodes} episodes)`,
         value: show,
         short: show.title
       };
@@ -139,7 +406,8 @@ async function promptShowSearch() {
         name: "selectedShow",
         message: "Select a show:",
         choices: choices,
-        pageSize: 12
+        pageSize: Math.min(process.stdout.rows - 8, 15),
+        loop: false
       }
     ]);
 
@@ -158,6 +426,7 @@ async function promptSeasonSelection(show) {
   /**
    * Select season to stream
    */
+  console.clear();
   console.log(`\n📺 ${show.title}`);
   console.log('─'.repeat(show.title.length + 4));
   
@@ -167,7 +436,8 @@ async function promptSeasonSelection(show) {
   );
   
   if (availableSeasons.length === 0) {
-    console.log('❌ No episodes available for this show.');
+    console.log('\n❌ No episodes available for this show.\n');
+    await new Promise(resolve => setTimeout(resolve, 2000));
     return null;
   }
 
@@ -187,7 +457,9 @@ async function promptSeasonSelection(show) {
       type: "list",
       name: "selectedSeason",
       message: "Select a season to stream:",
-      choices: seasonChoices
+      choices: seasonChoices,
+      pageSize: Math.min(process.stdout.rows - 6, 10),
+      loop: false
     }
   ]);
 
@@ -208,7 +480,9 @@ async function promptWatchOption() {
         { name: "🎬 Watch entire season", value: "season" },
         new inquirer.Separator(),
         { name: "🔙 Back to season selection", value: "back" }
-      ]
+      ],
+      pageSize: 6,
+      loop: false
     }
   ]);
 
@@ -219,10 +493,12 @@ async function promptEpisodeSelection(season) {
   /**
    * Select a specific episode from the season
    */
+  console.clear();
   console.log(`\n📺 Season ${season.season_number} Episodes`);
   console.log('─'.repeat(`Season ${season.season_number} Episodes`.length + 2));
+  console.log(`\nChoose from ${season.episodes.length} available episodes:\n`);
   
-  const episodeChoices = season.episodes.map(episode => ({
+  const episodeChoices = season.episodes.map((episode, index) => ({
     name: `Episode ${episode.episode_id}: ${episode.title}`,
     value: episode,
     short: `E${episode.episode_id}`
@@ -239,7 +515,8 @@ async function promptEpisodeSelection(season) {
       name: "selectedEpisode",
       message: "Select an episode to watch:",
       choices: episodeChoices,
-      pageSize: 10
+      pageSize: Math.min(process.stdout.rows - 8, 12),
+      loop: false
     }
   ]);
 
@@ -248,21 +525,22 @@ async function promptEpisodeSelection(season) {
 
 async function getAllSeasonStreamUrls(season, showTitle) {
   /**
-   * Extract actual stream URLs for all episodes in a season
+   * Extract actual stream URLs for all episodes in a season with improved handling
    */
   console.log(`\n🔄 Preparing ${season.episodes.length} episodes from Season ${season.season_number}...`);
-  console.log('This may take a moment as we extract the real stream URLs...\n');
+  console.log('This may take a moment as we extract stream URLs from multiple sources...\n');
   
   const streamUrls = [];
+  const failedEpisodes = [];
   const total = season.episodes.length;
   
   for (let i = 0; i < season.episodes.length; i++) {
     const episode = season.episodes[i];
     const progress = `[${i + 1}/${total}]`;
     
-    process.stdout.write(`\r${progress} Processing "${episode.title}"...`);
+    process.stdout.write(`\r${progress} Processing "${episode.title}"...                    `);
     
-    // Extract the actual 123moviespremium.net stream URL
+    // Extract stream URL with multiple source support
     const streamUrl = await getActualStreamUrl(
       episode.show_id, 
       episode.season_id, 
@@ -275,18 +553,46 @@ async function getAllSeasonStreamUrls(season, showTitle) {
         url: streamUrl,
         episode: episode
       });
+      process.stdout.write(`\r${progress} ✅ "${episode.title}"                    `);
     } else {
-      console.log(`\n⚠️  Failed to get stream URL for episode ${episode.episode_id}`);
+      failedEpisodes.push(`E${episode.episode_id} - ${episode.title}`);
+      process.stdout.write(`\r${progress} ❌ "${episode.title}"                    `);
     }
     
-    // Small delay to be respectful to the server
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    console.log(); // New line for next episode
+    
+    // Respectful delay with shorter interval for better UX
+    await new Promise(resolve => setTimeout(resolve, 800));
   }
   
-  console.log(`\n\n✅ Successfully prepared ${streamUrls.length}/${total} episodes`);
+  console.log(`\n📊 Results Summary:`);
+  console.log(`   ✅ Successfully found: ${streamUrls.length}/${total} episodes`);
+  
+  if (failedEpisodes.length > 0) {
+    console.log(`   ❌ Failed to find streams for: ${failedEpisodes.length} episodes`);
+    console.log(`   📝 Failed episodes: ${failedEpisodes.slice(0, 3).join(', ')}${failedEpisodes.length > 3 ? '...' : ''}`);
+  }
   
   if (streamUrls.length === 0) {
-    throw new Error("No valid stream URLs found for this season");
+    throw new Error("No valid stream URLs found for this season. The source might be unavailable or the show data may be outdated.");
+  }
+  
+  if (streamUrls.length < total) {
+    console.log(`\n⚠️  Some episodes couldn't be loaded. Proceeding with ${streamUrls.length} available episodes.`);
+    
+    // Ask user if they want to continue with partial episodes
+    const continueAnswer = await inquirer.prompt([
+      {
+        type: "confirm",
+        name: "continue",
+        message: `Continue with ${streamUrls.length} working episodes?`,
+        default: true
+      }
+    ]);
+    
+    if (!continueAnswer.continue) {
+      throw new Error("Streaming cancelled by user");
+    }
   }
   
   return streamUrls;
@@ -368,11 +674,11 @@ async function streamSeasonInMpv(season, showTitle) {
 
 async function streamEpisodeInMpv(episode, showTitle) {
   /**
-   * Stream a single episode in mpv with actual stream URL
+   * Stream a single episode in mpv with enhanced URL extraction
    */
   try {
     console.log(`\n🔄 Preparing S${episode.season_id}E${episode.episode_id} - ${episode.title}...`);
-    console.log('This may take a moment as we extract the real stream URL...\n');
+    console.log('Extracting stream URL from available sources...\n');
     
     // Get the actual stream URL for the episode
     const streamUrl = await getActualStreamUrl(
@@ -382,7 +688,26 @@ async function streamEpisodeInMpv(episode, showTitle) {
     );
     
     if (!streamUrl) {
-      throw new Error("Failed to get stream URL for this episode");
+      console.error(`❌ Could not find a working stream URL for this episode.`);
+      console.log(`💡 This could be because:`);
+      console.log(`   • The episode is not available on the streaming source`);
+      console.log(`   • The source website has changed its structure`);
+      console.log(`   • Temporary network issues\n`);
+      
+      const retryAnswer = await inquirer.prompt([
+        {
+          type: "confirm",
+          name: "retry",
+          message: "Would you like to try a different episode?",
+          default: true
+        }
+      ]);
+      
+      if (!retryAnswer.retry) {
+        return;
+      } else {
+        throw new Error("RETRY_EPISODE_SELECTION");
+      }
     }
     
     console.log(`\n🎬 Starting mpv for S${episode.season_id}E${episode.episode_id}...`);
@@ -416,11 +741,58 @@ async function streamEpisodeInMpv(episode, showTitle) {
   }
 }
 
+async function showStartupMenu() {
+  /**
+   * Show startup menu with advanced options
+   */
+  console.clear();
+  console.log('\n🎬 TrpTv Streaming CLI');
+  console.log('═════════════════════\n');
+  
+  const cacheInfo = Object.keys(workingShowsCache).length;
+  const menuChoices = [
+    { name: "🎯 Search & Watch Shows", value: "search" },
+    new inquirer.Separator(),
+    { 
+      name: `🔧 Advanced: Bulk test all shows (${cacheInfo} shows cached)`, 
+      value: "bulk_test" 
+    },
+    { name: "❌ Exit", value: "exit" }
+  ];
+
+  const answer = await inquirer.prompt([
+    {
+      type: "list",
+      name: "action",
+      message: "What would you like to do?",
+      choices: menuChoices
+    }
+  ]);
+
+  return answer.action;
+}
+
 async function main() {
   /**
-   * Main application loop
+   * Main application loop with startup menu
    */
   try {
+    // Ensure clean terminal start
+    console.clear();
+    
+    // Show startup menu
+    const startupAction = await showStartupMenu();
+    
+    if (startupAction === "exit") {
+      console.log('👋 Goodbye!');
+      process.exit(0);
+    } else if (startupAction === "bulk_test") {
+      await bulkTestAllShows();
+      // After bulk test, return to main menu
+      return main();
+    }
+    
+    // Main streaming loop
     while (true) {
       // Step 1: Search and select show
       const selectedShow = await promptShowSearch();
@@ -475,8 +847,16 @@ async function main() {
               ]);
               
               if (confirmAnswer.stream) {
-                await streamEpisodeInMpv(selectedEpisode, selectedShow.title);
-                return; // Exit after streaming
+                try {
+                  await streamEpisodeInMpv(selectedEpisode, selectedShow.title);
+                  return; // Exit after streaming
+                } catch (episodeError) {
+                  if (episodeError.message === "RETRY_EPISODE_SELECTION") {
+                    continue; // Go back to episode selection
+                  } else {
+                    throw episodeError; // Re-throw other errors
+                  }
+                }
               }
             }
           }

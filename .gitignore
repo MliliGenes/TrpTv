@@ -103,6 +103,7 @@ Thumbs.db
 # TrpTv specific
 *.m3u
 *.m3u8
+.working_shows_cache.json
 
 # IDE
 .vscode/
