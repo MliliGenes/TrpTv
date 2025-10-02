@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_at": "2025-10-02T07:27:17.170Z",
+  "generated_at": "2025-09-28T14:27:31.652Z",
   "source_file": "cartoons_data.json",
   "statistics": {
     "total_shows": 188,
@@ -9,7 +9,7 @@
     "shows_with_episodes": 186,
     "avg_episodes_per_show": 135,
     "most_episodes": 1240,
-    "generation_time": "2025-10-02T07:27:17.170Z"
+    "generation_time": "2025-09-28T14:27:31.652Z"
   },
   "shows": [
     {
@@ -30,7 +30,7 @@
         "xiaolin",
         "chronicles"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.645Z",
       "show_id": "60306"
     },
     {
@@ -61,7 +61,7 @@
         "martin",
         "mystery"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.645Z",
       "show_id": "140"
     },
     {
@@ -102,7 +102,7 @@
         "the",
         "batman"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.645Z",
       "show_id": "2022"
     },
     {
@@ -126,7 +126,7 @@
         "world",
         "gumball"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.645Z",
       "show_id": "291904"
     },
     {
@@ -163,7 +163,7 @@
         "cleveland",
         "show"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.645Z",
       "show_id": "15632"
     },
     {
@@ -192,7 +192,7 @@
       "search_terms": [
         "unikitty"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.645Z",
       "show_id": "74739"
     },
     {
@@ -228,7 +228,7 @@
         "team",
         "umizoomi"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.645Z",
       "show_id": "31623"
     },
     {
@@ -270,7 +270,7 @@
         "monkie",
         "kid"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.645Z",
       "show_id": "106251"
     },
     {
@@ -292,7 +292,7 @@
         "side",
         "effects"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.646Z",
       "show_id": "228878"
     },
     {
@@ -370,7 +370,7 @@
         "hunger",
         "force"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.646Z",
       "show_id": "251"
     },
     {
@@ -421,7 +421,7 @@
         "wild",
         "kratts"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.646Z",
       "show_id": "35094"
     },
     {
@@ -449,7 +449,7 @@
         "batman",
         "adventures"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.646Z",
       "show_id": "4625"
     },
     {
@@ -485,7 +485,7 @@
         "x-men:",
         "evolution"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "668"
     },
     {
@@ -525,7 +525,7 @@
         "camp camp",
         "camp"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "67053"
     },
     {
@@ -551,7 +551,7 @@
         "clone",
         "high"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "118546"
     },
     {
@@ -587,7 +587,7 @@
         "inazuma",
         "eleven"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "42912"
     },
     {
@@ -609,7 +609,7 @@
         "family",
         "usa"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "218510"
     },
     {
@@ -630,7 +630,7 @@
         "sym-bionic",
         "titan"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "32315"
     },
     {
@@ -661,7 +661,7 @@
         "elena",
         "avalor"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "67175"
     },
     {
@@ -707,7 +707,7 @@
         "bubble",
         "guppies"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "39107"
     },
     {
@@ -734,7 +734,7 @@
         "hero",
         "girls"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "87491"
     },
     {
@@ -771,7 +771,7 @@
         "wars",
         "rebels"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "60554"
     },
     {
@@ -867,7 +867,7 @@
         "bob’s",
         "burgers"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "32726"
     },
     {
@@ -898,7 +898,7 @@
         "xiaolin",
         "showdown"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "679"
     },
     {
@@ -930,7 +930,7 @@
         "from",
         "tomorrowland"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "62181"
     },
     {
@@ -985,7 +985,7 @@
         "(2003)",
         "2003"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "2284"
     },
     {
@@ -1012,7 +1012,7 @@
         "spectacular",
         "spider-man"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "3854"
     },
     {
@@ -1049,7 +1049,7 @@
         "ultimate",
         "spider-man"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "34391"
     },
     {
@@ -1086,7 +1086,7 @@
         "after",
         "high"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "61775"
     },
     {
@@ -1117,7 +1117,7 @@
         "sonic",
         "prime"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "115577"
     },
     {
@@ -1154,7 +1154,7 @@
         "luck",
         "charlie"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "21641"
     },
     {
@@ -1190,7 +1190,7 @@
         "zoey",
         "101"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "1778"
     },
     {
@@ -1227,7 +1227,7 @@
         "time",
         "rush"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "31356"
     },
     {
@@ -1258,7 +1258,7 @@
         "close",
         "enough"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "84503"
     },
     {
@@ -1286,7 +1286,7 @@
         "island",
         "reboot"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "224285"
     },
     {
@@ -1316,7 +1316,7 @@
         "ninja",
         "turtles"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "81026"
     },
     {
@@ -1343,7 +1343,7 @@
         "incredible",
         "hulk"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "6332"
     },
     {
@@ -1381,7 +1381,7 @@
         "dragons",
         "rising"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "212989"
     },
     {
@@ -1411,7 +1411,7 @@
         "sonic x",
         "sonic"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "10926"
     },
     {
@@ -1438,7 +1438,7 @@
         "vs.",
         "kat"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "17463"
     },
     {
@@ -1464,7 +1464,7 @@
         "hazbin",
         "hotel"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "94954"
     },
     {
@@ -1520,7 +1520,7 @@
         "hero",
         "academia"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "65930"
     },
     {
@@ -1548,7 +1548,7 @@
         "jake",
         "long"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "346"
     },
     {
@@ -1576,7 +1576,7 @@
         "jake",
         "long"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "346"
     },
     {
@@ -1604,7 +1604,7 @@
         "suburban",
         "daredevil"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "17572"
     },
     {
@@ -1645,7 +1645,7 @@
         "camp",
         "lazlo"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "557"
     },
     {
@@ -1677,7 +1677,7 @@
         "teenage",
         "robot"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "178"
     },
     {
@@ -1733,7 +1733,7 @@
         "winx",
         "club"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "1848"
     },
     {
@@ -1765,7 +1765,7 @@
         "proud",
         "family"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "543"
     },
     {
@@ -1778,7 +1778,7 @@
       "search_terms": [
         "breadwinners"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": null
     },
     {
@@ -1795,7 +1795,7 @@
         "the",
         "series"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": null
     },
     {
@@ -1825,7 +1825,7 @@
         "devil",
         "dinosaur"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "92788"
     },
     {
@@ -1862,7 +1862,7 @@
         "the",
         "first"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "46928"
     },
     {
@@ -1896,7 +1896,7 @@
       "search_terms": [
         "chalkzone"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "4413"
     },
     {
@@ -1931,7 +1931,7 @@
         "boy",
         "genius"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "2129"
     },
     {
@@ -1973,7 +1973,7 @@
         "wild",
         "thornberrys"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "2408"
     },
     {
@@ -2022,7 +2022,7 @@
       "search_terms": [
         "doug"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "384"
     },
     {
@@ -2054,7 +2054,7 @@
         "amanda",
         "show"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "376"
     },
     {
@@ -2120,7 +2120,7 @@
         "all",
         "that"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "3814"
     },
     {
@@ -2179,7 +2179,7 @@
       "search_terms": [
         "rugrats"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "3022"
     },
     {
@@ -2220,7 +2220,7 @@
         "hey",
         "arnold!"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "537"
     },
     {
@@ -2241,7 +2241,7 @@
         "the",
         "prince"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "98315"
     },
     {
@@ -2275,7 +2275,7 @@
       "search_terms": [
         "victorious"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "31251"
     },
     {
@@ -2304,7 +2304,7 @@
       "search_terms": [
         "bluey"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "82728"
     },
     {
@@ -2355,7 +2355,7 @@
         "young",
         "sheldon"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "71728"
     },
     {
@@ -2381,7 +2381,7 @@
         "pickle",
         "peanut"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "62853"
     },
     {
@@ -2422,7 +2422,7 @@
         "harley",
         "quinn"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "74440"
     },
     {
@@ -2458,7 +2458,7 @@
         "mia",
         "and"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "52051"
     },
     {
@@ -2529,7 +2529,7 @@
         "paw",
         "patrol"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "57532"
     },
     {
@@ -2558,7 +2558,7 @@
       "search_terms": [
         "monsuno"
       ],
-      "last_updated": "2025-10-02T07:27:17.168Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "56402"
     },
     {
@@ -2587,7 +2587,7 @@
       "search_terms": [
         "invincible"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "95557"
     },
     {
@@ -2616,7 +2616,7 @@
         "squad",
         "show"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "21781"
     },
     {
@@ -2653,7 +2653,7 @@
         "legend",
         "korra"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "33880"
     },
     {
@@ -2695,7 +2695,7 @@
         "city",
         "greens"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "80587"
     },
     {
@@ -2719,7 +2719,7 @@
       "search_terms": [
         "lolirock"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "66762"
     },
     {
@@ -2750,7 +2750,7 @@
         "danger",
         "force"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "99583"
     },
     {
@@ -2789,7 +2789,7 @@
       "search_terms": [
         "dinotrux"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "63350"
     },
     {
@@ -2820,7 +2820,7 @@
         "dinotrux:",
         "supercharged"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "77962"
     },
     {
@@ -2848,7 +2848,7 @@
         "tunes",
         "show"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "32605"
     },
     {
@@ -2969,7 +2969,7 @@
         "american",
         "dad!"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "1433"
     },
     {
@@ -3005,7 +3005,7 @@
         "kim",
         "possible"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "2345"
     },
     {
@@ -3034,7 +3034,7 @@
       "search_terms": [
         "bunnicula"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "65564"
     },
     {
@@ -3071,7 +3071,7 @@
         "and",
         "chicken"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "3611"
     },
     {
@@ -3095,7 +3095,7 @@
         "pure",
         "heart"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "91246"
     },
     {
@@ -3116,7 +3116,7 @@
         "hailey’s",
         "it!"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "138992"
     },
     {
@@ -3140,7 +3140,7 @@
       "search_terms": [
         "arcane"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "94605"
     },
     {
@@ -3171,7 +3171,7 @@
         "duck",
         "dodgers"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "216"
     },
     {
@@ -3210,7 +3210,7 @@
         "winnie",
         "pooh"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "2005"
     },
     {
@@ -3236,7 +3236,7 @@
         "justice",
         "league"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "1618"
     },
     {
@@ -3263,7 +3263,7 @@
         "the",
         "wayne"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "72983"
     },
     {
@@ -3299,7 +3299,7 @@
         "johnny",
         "bravo"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "2405"
     },
     {
@@ -3339,7 +3339,7 @@
         "land",
         "pirates"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "34891"
     },
     {
@@ -3365,7 +3365,7 @@
         "ghost",
         "force"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "133470"
     },
     {
@@ -3392,7 +3392,7 @@
         "over",
         "yonder"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "45013"
     },
     {
@@ -3454,7 +3454,7 @@
         "loud",
         "house"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "68073"
     },
     {
@@ -3490,7 +3490,7 @@
         "the",
         "thundermans"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "58981"
     },
     {
@@ -3523,7 +3523,7 @@
         "last",
         "airbender"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "246"
     },
     {
@@ -3546,7 +3546,7 @@
         "the",
         "underworld"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "223447"
     },
     {
@@ -3712,7 +3712,7 @@
         "power",
         "rangers"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "2328"
     },
     {
@@ -3748,7 +3748,7 @@
         "the",
         "boondocks"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "2604"
     },
     {
@@ -3771,7 +3771,7 @@
         "(case",
         "closed)"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "30983"
     },
     {
@@ -3802,7 +3802,7 @@
         "batman",
         "beyond"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "513"
     },
     {
@@ -3833,7 +3833,7 @@
         "smiling",
         "friends"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "126506"
     },
     {
@@ -3890,7 +3890,7 @@
         "legendary",
         "defender"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "66558"
     },
     {
@@ -3921,7 +3921,7 @@
         "final",
         "space"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "74387"
     },
     {
@@ -3950,7 +3950,7 @@
       "search_terms": [
         "catdog"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "1567"
     },
     {
@@ -4151,7 +4151,7 @@
         "the",
         "simpsons"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "456"
     },
     {
@@ -4277,7 +4277,7 @@
         "one",
         "piece"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "37854"
     },
     {
@@ -4321,7 +4321,7 @@
         "princesses",
         "power"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "79732"
     },
     {
@@ -4350,7 +4350,7 @@
       "search_terms": [
         "hilda"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "82456"
     },
     {
@@ -4371,7 +4371,7 @@
         "inside",
         "job"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "97727"
     },
     {
@@ -4438,7 +4438,7 @@
         "fairly",
         "oddparents"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "4630"
     },
     {
@@ -4469,7 +4469,7 @@
         "t.u.f.f.",
         "puppy"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "18828"
     },
     {
@@ -4524,7 +4524,7 @@
         "and",
         "mandy"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "897"
     },
     {
@@ -4573,7 +4573,7 @@
         "imaginary",
         "friends"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "1720"
     },
     {
@@ -4595,7 +4595,7 @@
         "drama",
         "island"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "6618"
     },
     {
@@ -4644,7 +4644,7 @@
         "cat",
         "noir"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "65334"
     },
     {
@@ -4692,7 +4692,7 @@
         "the",
         "edge"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "78173"
     },
     {
@@ -4718,7 +4718,7 @@
         "dreamworks",
         "dragons"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "44305"
     },
     {
@@ -4779,7 +4779,7 @@
         "dragon",
         "ball"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "12971"
     },
     {
@@ -4813,7 +4813,7 @@
       "search_terms": [
         "lazytown"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "1894"
     },
     {
@@ -4849,7 +4849,7 @@
         "rabbids",
         "invasion"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "62201"
     },
     {
@@ -4881,7 +4881,7 @@
         "and",
         "craig"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "61520"
     },
     {
@@ -4922,7 +4922,7 @@
         "henry",
         "danger"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "61852"
     },
     {
@@ -4969,7 +4969,7 @@
         "camp",
         "island"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.649Z",
       "show_id": "81665"
     },
     {
@@ -5039,7 +5039,7 @@
         "(1987)",
         "1987"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "160"
     },
     {
@@ -5085,7 +5085,7 @@
         "johnny",
         "test"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "1769"
     },
     {
@@ -5111,7 +5111,7 @@
         "harvey",
         "beaks"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "62487"
     },
     {
@@ -5134,7 +5134,7 @@
         "the",
         "hedgehog"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "44"
     },
     {
@@ -5160,7 +5160,7 @@
         "sonic",
         "boom"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "62211"
     },
     {
@@ -5224,7 +5224,7 @@
       "search_terms": [
         "octonauts"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "37472"
     },
     {
@@ -5256,7 +5256,7 @@
         "lion",
         "guard"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "64752"
     },
     {
@@ -5278,7 +5278,7 @@
         "genesis",
         "evangelion"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "890"
     },
     {
@@ -5417,7 +5417,7 @@
       "search_terms": [
         "pokémon"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "60572"
     },
     {
@@ -5443,7 +5443,7 @@
         "max",
         "steel"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "46974"
     },
     {
@@ -5489,7 +5489,7 @@
         "bojack",
         "horseman"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "61222"
     },
     {
@@ -5552,7 +5552,7 @@
         "friendship",
         "magic"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "33765"
     },
     {
@@ -5703,7 +5703,7 @@
         "south",
         "park"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "2190"
     },
     {
@@ -5751,7 +5751,7 @@
         "next",
         "door"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "2660"
     },
     {
@@ -5882,7 +5882,7 @@
         "family",
         "guy"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "1434"
     },
     {
@@ -5938,7 +5938,7 @@
         "big",
         "mouth"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "74204"
     },
     {
@@ -5974,7 +5974,7 @@
         "bare",
         "bears"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "63401"
     },
     {
@@ -6008,7 +6008,7 @@
       "search_terms": [
         "slugterra"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "46994"
     },
     {
@@ -6059,7 +6059,7 @@
         "totally",
         "spies!"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "2808"
     },
     {
@@ -6088,7 +6088,7 @@
       "search_terms": [
         "amphibia"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "85349"
     },
     {
@@ -6124,7 +6124,7 @@
         "dexter’s",
         "laboratory"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "4229"
     },
     {
@@ -6169,7 +6169,7 @@
         "(2012)",
         "1987"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "51817"
     },
     {
@@ -6223,7 +6223,7 @@
         "clone",
         "wars"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "4194"
     },
     {
@@ -6255,7 +6255,7 @@
         "owl",
         "house"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "92685"
     },
     {
@@ -6287,7 +6287,7 @@
         "let’s",
         "heroes"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "72468"
     },
     {
@@ -6323,7 +6323,7 @@
         "young",
         "justice"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "33217"
     },
     {
@@ -6349,7 +6349,7 @@
         "apple",
         "onion"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "78254"
     },
     {
@@ -6396,7 +6396,7 @@
         "the",
         "creek"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "79061"
     },
     {
@@ -6429,7 +6429,7 @@
         "misadventures",
         "flapjack"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "6673"
     },
     {
@@ -6470,7 +6470,7 @@
         "teen",
         "titans"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "604"
     },
     {
@@ -6501,7 +6501,7 @@
         "generator",
         "rex"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "32118"
     },
     {
@@ -6528,7 +6528,7 @@
         "mystery",
         "incorporated"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "18123"
     },
     {
@@ -6560,7 +6560,7 @@
         "new,",
         "scooby-doo?"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "652"
     },
     {
@@ -6657,7 +6657,7 @@
         "masters",
         "spinjitzu"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "38693"
     },
     {
@@ -6694,7 +6694,7 @@
         "reboot",
         "series"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "68295"
     },
     {
@@ -6751,7 +6751,7 @@
         "10:",
         "omniverse"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "46922"
     },
     {
@@ -6779,7 +6779,7 @@
         "ultimate",
         "alien"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "31109"
     },
     {
@@ -6812,7 +6812,7 @@
         "alien",
         "force"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "6040"
     },
     {
@@ -6847,7 +6847,7 @@
         "ben 10",
         "ben"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "4686"
     },
     {
@@ -6870,7 +6870,7 @@
         "garden",
         "wall"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "61617"
     },
     {
@@ -6901,7 +6901,7 @@
         "danny",
         "phantom"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "2309"
     },
     {
@@ -6942,7 +6942,7 @@
         "uncle",
         "grandpa"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "47035"
     },
     {
@@ -6983,7 +6983,7 @@
         "samurai",
         "jack"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "2723"
     },
     {
@@ -7019,7 +7019,7 @@
         "infinity",
         "train"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "91425"
     },
     {
@@ -7058,7 +7058,7 @@
         "forces",
         "evil"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "61923"
     },
     {
@@ -7105,7 +7105,7 @@
         "edd",
         "eddy"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "606"
     },
     {
@@ -7147,7 +7147,7 @@
         "and",
         "ferb"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "1877"
     },
     {
@@ -7176,7 +7176,7 @@
       "search_terms": [
         "chowder"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "9907"
     },
     {
@@ -7202,7 +7202,7 @@
         "invader",
         "zim"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "3793"
     },
     {
@@ -7264,7 +7264,7 @@
         "titans",
         "go!"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "45140"
     },
     {
@@ -7293,7 +7293,7 @@
       "search_terms": [
         "clarence"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "50035"
     },
     {
@@ -7340,7 +7340,7 @@
         "powerpuff",
         "girls"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "607"
     },
     {
@@ -7436,7 +7436,7 @@
         "spongebob",
         "squarepants"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "387"
     },
     {
@@ -7489,7 +7489,7 @@
         "world",
         "gumball"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "37606"
     },
     {
@@ -7527,7 +7527,7 @@
         "cowardly",
         "dog"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "2085"
     },
     {
@@ -7584,7 +7584,7 @@
         "and",
         "morty"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "60625"
     },
     {
@@ -7610,7 +7610,7 @@
         "gravity",
         "falls"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "40075"
     },
     {
@@ -7632,7 +7632,7 @@
         "universe",
         "future"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "94280"
     },
     {
@@ -7655,7 +7655,7 @@
         "fionna",
         "cake"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "131378"
     },
     {
@@ -7678,7 +7678,7 @@
         "distant",
         "lands"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "94810"
     },
     {
@@ -7734,7 +7734,7 @@
         "regular",
         "show"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "31132"
     },
     {
@@ -7800,7 +7800,7 @@
         "adventure",
         "time"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "15260"
     },
     {
@@ -7841,7 +7841,7 @@
         "steven",
         "universe"
       ],
-      "last_updated": "2025-10-02T07:27:17.169Z",
+      "last_updated": "2025-09-28T14:27:31.650Z",
       "show_id": "61175"
     }
   ],
